@@ -62,7 +62,12 @@ func main() {
 	router.GET("/orders/:id", getOrder)
 	router.GET("/orders", listOrders)
 
-	router.Run(":8082")
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8082" // локально
+	}
+
+	router.Run(":" + port)
 }
 
 // POST /orders — создать заказ
